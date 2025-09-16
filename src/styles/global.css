@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+/* poppins-bold */
+@font-face {
+	font-family: "Poppins";
+	font-style: normal;
+	font-weight: 700;
+	font-stretch: 100%;
+	src: local("Poppins Bold"), local("Poppins-Bold"), url(../assets/fonts/poppins/poppins-bold.woff2) format("woff2");
+}
+/* poppins-medium */
+@font-face {
+	font-family: "Poppins";
+	font-style: normal;
+	font-weight: 500;
+	font-stretch: 100%;
+	src: local("Poppins Medium"), local("Poppins-Medium"), url(../assets/fonts/poppins/poppins-medium.woff2) format("woff2");
+}
+/* poppins */
+@font-face {
+	font-family: "Poppins";
+	font-style: normal;
+	font-weight: 400;
+	font-stretch: 100%;
+	src: local("Poppins Regular"), local("Poppins-Regular"), url(../assets/fonts/poppins/poppins.woff2) format("woff2");
+}
+/* poppins-extrabold */
+@font-face {
+	font-family: "Poppins";
+	font-style: normal;
+	font-weight: 800;
+	font-stretch: 100%;
+	src: local("Poppins ExtraBold"), local("Poppins-ExtraBold"), url(../assets/fonts/poppins/poppins-extrabold.woff2) format("woff2");
+}
+/* poppins-extralight */
+@font-face {
+	font-family: "Poppins";
+	font-style: normal;
+	font-weight: 200;
+	font-stretch: 100%;
+	src: local("Poppins ExtraLight"), local("Poppins-ExtraLight"), url(../assets/fonts/poppins/poppins-extralight.woff2) format("woff2");
+}
+/* anton */
+@font-face {
+	font-family: "Anton";
+	font-style: normal;
+	font-weight: 400;
+	font-stretch: 100%;
+	src: local("Anton Regular"), local("Anton-Regular"), url(../assets/fonts/anton/anton.woff2) format("woff2");
+}
