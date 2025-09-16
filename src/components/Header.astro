@@ -1,0 +1,82 @@
+---
+import profile from "../assets/images/profile.webp";
+import pixelTriangule from "../assets/images/pixel-triangule.svg";
+---
+
+<header id="home" class="header">
+	<div class="header-content">
+        <img class="header__profile-img" src={profile.src} alt="Profile" />
+        <div class="short-info">
+                <h1><span>Web Developer </span><span>Juliann Alejandro Gabriel</span></h1>
+                <p>
+                    I am a <b>Telematics Engineering</b> student with experience in front-end and
+                    back-end development.
+                </p>
+            </div>
+            <span class="header__word text-right">Juliann</span>
+            <span class="header__word">Alejandro</span>
+            <div class="header__socials">
+                <h2 class="social">Social</h2>
+                
+            </div>
+            <button class="header__button">
+                About Me
+                <img src={pixelTriangule.src} alt="" class="pixel-triangule-icon">
+            </button>
+            <span class="header__word text-center">Gabriel</span>
+            <div class="header__decorative-masked-element"></div>
+    </div>
+</header>
+
+<style>
+	@reference "tailwindcss";
+	.header {
+		@apply relative h-dvh pt-21 pb-6 px-6 bg-purple-200/80 text-purple-900 overflow-hidden;
+        min-height: 700px;
+        max-height: 1252px;
+
+        .header-content {
+            @apply grid items-center justify-center max-w-7xl mx-auto gap-5 sm:grid-cols-2 sm:grid-rows-4 sm:w-full;
+
+        }
+
+        h1 {
+            @apply mb-3 text-2xl text-center sm:text-left;
+            font-family: "Anton", sans-serif;
+
+            span:first-child {
+                @apply hidden sm:block;
+            }
+            span:nth-child(2) {
+                @apply sm:hidden;
+            }
+        }
+        p {
+            @apply text-center sm:text-left;
+        }
+	}
+    .header__word {
+        @apply hidden font-extrabold sm:block;
+        font-size: clamp(2rem, 10vw, 8rem);
+        font-family: 'Anton', sans-serif;
+    }
+    .header__button {
+        @apply flex mx-auto items-center w-fit gap-3 py-3 px-4 rounded-xl font-bold bg-white cursor-pointer transition-all hover:bg-cyan-100 active:px-6 sm:m-0 sm:flex-col;
+        font-family: "Poppins", sans-serif;
+
+        img.pixel-triangule-icon {
+            @apply w-6 sm:w-12;
+        }
+    }
+    .header__socials {
+        @apply hidden p-3 bg-white h-full rounded-2xl sm:block;
+    }
+	.header__profile-img {
+		@apply min-w-72 h-72 mx-auto object-cover mask-contain mask-no-repeat mask-center sm:hidden;
+		mask-image: url("../assets/images/soft-boom.svg");
+	}
+    .header__decorative-masked-element {
+        @apply absolute aspect-square bottom-0 right-0 h-full bg-cyan-300 translate-x-1/2 translate-y-1/2 -z-10 mask-no-repeat mask-contain mask-center;
+        mask-image: url('../assets/images/pixel-circle.svg');
+    }
+</style>
