@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+@theme {
+	--font-anton: "Anton", sans-serif;
+	--font-poppins: "Poppins", sans-serif;
+}
+
 /* poppins-bold */
 @font-face {
 	font-family: "Poppins";
