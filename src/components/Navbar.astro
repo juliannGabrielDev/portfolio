@@ -1,0 +1,87 @@
+---
+import profile from "../assets/images/profile.webp";
+---
+
+<div id="navbar" class="navbar-wrapper">
+	<div class="navbar__profile-wrapper">
+		<img class="profile-img" src={profile.src} alt="Profile" />
+	</div>
+	<nav class="navbar">
+		<ul>
+			<li class="navbar__links"><a href="#home">Home</a></li>
+			<li class="navbar__links"><a href="#about-me">About Me</a></li>
+			<li class="navbar__links"><a href="#projects">Projects</a></li>
+			<li class="navbar__links"><a href="#contact">Contact</a></li>
+		</ul>
+	</nav>
+</div>
+
+<style>
+	@reference "tailwindcss";
+	.navbar-wrapper {
+		@apply hidden sm:flex fixed z-10 right-0 left-0 justify-center gap-1 font-medium transition-transform duration-300 ease-in-out transform text-sm sm:text-base sm:top-1;
+        @media (width < 40rem) {
+            @apply bottom-1;
+        }
+	}
+	.navbar-wrapper--visible {
+		@apply translate-y-0;
+	}
+	.navbar-wrapper--hidden {
+		@apply translate-y-full;
+	}
+	.navbar__profile-wrapper {
+		@apply hidden items-center bg-white/80 backdrop-blur-md border-b border-gray-200 p-2 sm:rounded-l-4xl rounded-r-xl sm:flex;
+
+		.profile-img {
+			mask-image: url("../assets/images/soft-boom.svg");
+			@apply w-12 h-12 object-cover mask-center mask-no-repeat mask-contain;
+		}
+	}
+	.navbar {
+		@apply w-fit flex justify-end bg-white/80 backdrop-blur-md border-b border-gray-200 p-4 rounded-2xl sm:rounded-xl sm:rounded-r-4xl;
+
+		ul {
+			@apply flex gap-2 select-none;
+		}
+		.navbar__links {
+			@apply flex bg-purple-100 rounded-lg hover:bg-cyan-200 cursor-pointer ease-in-out transition-colors;
+
+            a {
+                @apply px-3 py-1 transition-all active:px-2 sm:active:px-6;
+            }
+		}
+		.navbar__links--active {
+			@apply bg-cyan-300 rounded-2xl hover:bg-cyan-400;
+		}
+	}
+</style>
+
+<script>
+	document.addEventListener("DOMContentLoaded", () => {
+		const sections = document.querySelectorAll("section.section, header#home");
+		const navbarLinks = document.querySelectorAll(".navbar__links");
+
+		const onScroll = () => {
+			let currentSection: string | null = "";
+			const scrollPosition = window.scrollY + 200;
+
+			sections.forEach((section) => {
+				const sectionTop = (section as HTMLElement).offsetTop;
+				if (scrollPosition >= sectionTop) {
+					currentSection = section.getAttribute("id");
+				}
+			});
+
+			navbarLinks.forEach((link) => {
+				link.classList.toggle(
+					"navbar__links--active",
+					link.textContent.toLowerCase().replace(" ", "-") === currentSection
+				);
+			});
+		};
+
+        onScroll();
+		window.addEventListener("scroll", onScroll);
+	});
+</script>
