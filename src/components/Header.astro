@@ -1,5 +1,5 @@
 ---
-import profile from "../assets/images/profile.webp";
+import profile from "../assets/images/profile.jpg";
 import pixelTriangule from "../assets/images/pixel-triangule.svg";
 import githubLogo from "../assets/images/github.svg";
 import instagramLogo from "../assets/images/instagram.svg";
@@ -8,116 +8,246 @@ import linkedinLogo from "../assets/images/linkedin.svg";
 
 <header id="home" class="header">
 	<div class="header-content">
-        <img class="header__profile-img" src={profile.src} alt="Profile" />
-        <div class="short-info">
-                <h1><span>Web Developer </span><span>Juliann Alejandro Gabriel</span></h1>
-                <p>
-                    I am a <b>Telematics Engineering</b> student with experience in front-end and
-                    back-end development.
-                </p>
-            </div>
-            <span class="header__word text-right">Juliann</span>
-            <span class="header__word">Alejandro</span>
-            <div class="header__socials">
-                <h2>Social</h2>
-                <div class="w-fit p-3 rounded-2xl flex gap-4 bg-white">
-                    <div class="social github">
-                        <a href="https://github.com/juliannGabrielDev" target="_blank">
-                            <img src={githubLogo.src} alt="GitHub">
-                        </a>
-                    </div>
-                    <div class="social linkedin">
-                        <a href="https://www.linkedin.com/in/julián-gabriel-isidro-41a898327" target="_blank">
-                            <img src={linkedinLogo.src} alt="LinkedIn">
-                        </a>
-                    </div>
-                    <div class="social instagram">
-                        <a href="https://www.instagram.com/" target="_blank">
-                            <img src={instagramLogo.src} alt="Instagram">
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <button class="header__button">
-                About Me
-                <img src={pixelTriangule.src} alt="" class="pixel-triangule-icon">
-            </button>
-            <span class="header__word text-center">Gabriel</span>
-            <div class="header__decorative-masked-element"></div>
-    </div>
+		<img class="header__profile-img" src={profile.src} alt="Profile" />
+		<div class="short-info">
+			<h1><span>Web Developer </span><span>Juliann Alejandro Gabriel</span></h1>
+			<p>
+				I am a <b>Telematics Engineering</b> student with experience in front-end
+				and back-end development.
+			</p>
+		</div>
+		<span class="header__word text-right" aria-hidden="true">Juliann</span>
+		<span class="header__word" aria-hidden="true">Alejandro</span>
+		<div class="header__socials">
+			<div class="w-fit p-3 rounded-2xl flex gap-4 bg-white">
+				<h2>Social</h2>
+				<div class="social github">
+					<a href="https://github.com/juliannGabrielDev" target="_blank">
+						<img src={githubLogo.src} alt="GitHub" />
+					</a>
+				</div>
+				<div class="social linkedin">
+					<a
+						href="https://www.linkedin.com/in/julián-gabriel-isidro-41a898327"
+						target="_blank"
+					>
+						<img src={linkedinLogo.src} alt="LinkedIn" />
+					</a>
+				</div>
+				<div class="social instagram">
+					<a href="https://www.instagram.com/" target="_blank">
+						<img src={instagramLogo.src} alt="Instagram" />
+					</a>
+				</div>
+			</div>
+		</div>
+		<button class="header__button">
+			<span class="header__button-bg"></span>
+			<a href="#about-me">
+				<span class="header__button-text">
+					View More
+					<img src={pixelTriangule.src} alt="" class="pixel-triangule-icon" />
+				</span>
+			</a>
+		</button>
+		<span class="header__word text-center" aria-hidden="true">Gabriel</span>
+		<div class="header__decorative-masked-element pixel-circle"></div>
+		<div class="header__decorative-masked-element boom"></div>
+		<div class="header__bg"></div>
+	</div>
 </header>
 
 <style>
+	@reference "../styles/global.css";
 	@reference "tailwindcss";
 	.header {
-		@apply relative pt-21 pb-6 px-6 bg-purple-200/80 text-purple-900 overflow-hidden;
-        height: 90dvh;
-        min-height: 700px;
-        max-height: 1252px;
+		@apply relative pt-15 h-dvh pb-6 px-6 text-lime-900 overflow-hidden sm:px-12;
+		min-height: 700px;
+		max-height: 1252px;
 
-        .header-content {
-            @apply grid items-center justify-center max-w-6xl mx-auto gap-x-5 gap-y-10 sm:grid-cols-2 sm:grid-rows-4 sm:w-full;
+		.header-content {
+			@apply grid items-center justify-center max-w-6xl mx-auto gap-x-5 gap-y-10 sm:grid-cols-2 sm:grid-rows-4 sm:w-full sm:py-12 sm:h-full;
+		}
 
-        }
+		h1 {
+			@apply mb-3 text-2xl font-anton text-center sm:text-left;
 
-        h1 {
-            @apply mb-3 text-2xl text-center sm:text-left;
-            font-family: "Anton", sans-serif;
-
-            span:first-child {
-                @apply hidden sm:block;
-            }
-            span:nth-child(2) {
-                @apply sm:hidden;
-            }
-        }
-        p {
-            @apply text-center sm:max-w-2xs sm:text-left;
-        }
+			span:first-child {
+				@apply hidden sm:block;
+			}
+			span:nth-child(2) {
+				@apply sm:hidden;
+			}
+		}
+		p {
+			@apply text-center sm:max-w-2xs sm:text-left;
+		}
 	}
-    .header__word {
-        @apply hidden font-extrabold sm:block;
-        font-size: clamp(2rem, 10vw, 8rem);
-        font-family: 'Anton', sans-serif;
-    }
-    .header__button {
-        @apply flex mx-auto items-center w-fit gap-3 py-3 px-4 rounded-xl font-bold bg-white cursor-pointer transition-all hover:bg-cyan-100 active:px-6 sm:m-0 sm:flex-col;
-        font-family: "Poppins", sans-serif;
+	.header__word {
+		@apply hidden font-anton font-extrabold sm:block;
+		font-size: clamp(2rem, 10vw, 8rem);
+	}
+	.header__button {
+		@apply relative mx-auto w-fit rounded-xl font-poppins font-bold bg-white cursor-pointer transition-all active:px-6 sm:m-0 overflow-hidden;
 
-        img.pixel-triangule-icon {
-            @apply w-6 sm:w-12;
-        }
-    }
-    .header__socials {
-        @apply hidden p-3 h-full rounded-2xl sm:flex gap-5 items-center;
+		a {
+			@apply block;
+		}
 
-        h2 {
-            @apply text-2xl;
-            font-family: "Anton", sans-serif;
-        }
-        .social {
-            @apply w-13 h-13 p-3 mask-contain mask-no-repeat mask-center;
-        }
+		.header__button-text {
+			@apply relative z-10 flex items-center gap-3 py-3 px-4 sm:flex-col sm:items-start;
+		}
 
-        .github {
-            mask-image: url('../assets/images/sunny.svg');
-            @apply bg-cyan-200;
-        }
-        .linkedin {
-            mask-image: url('../assets/images/sided-cookie-9.svg');
-            @apply bg-yellow-200;
-        }
-        .instagram {
-            mask-image: url('../assets/images/leaf-clover-4.svg');
-            @apply bg-lime-200;
-        }
-    }
+		.header__button-bg {
+			@apply absolute block w-24 h-24 bg-cyan-300 rounded-full;
+			top: 0;
+			left: 0;
+			transform: scale(0);
+			pointer-events: none;
+		}
+
+		img.pixel-triangule-icon {
+			@apply w-6 sm:w-12 pointer-events-none;
+		}
+	}
+	.header__socials {
+		@apply hidden p-3 h-full rounded-2xl sm:flex gap-5 items-center;
+
+		h2 {
+			@apply font-anton text-2xl;
+		}
+		.social {
+			@apply w-13 h-13 p-3 mask-contain mask-no-repeat mask-center transition-transform duration-300 ease-in hover:rotate-45 active:scale-90;
+		}
+
+		.github {
+			mask-image: url("../assets/images/sunny.svg");
+			@apply bg-cyan-200;
+		}
+		.linkedin {
+			mask-image: url("../assets/images/sided-cookie-9.svg");
+			@apply bg-lime-200;
+		}
+		.instagram {
+			mask-image: url("../assets/images/leaf-clover-4.svg");
+			@apply bg-lime-200;
+		}
+	}
 	.header__profile-img {
-		@apply min-w-72 h-72 mx-auto object-cover mask-contain mask-no-repeat mask-center sm:hidden;
-		mask-image: url("../assets/images/soft-boom.svg");
+		@apply min-w-72 h-72 mx-auto object-cover object-top mask-contain mask-no-repeat mask-center sm:hidden;
+		mask-image: url("../assets/images/leaf-clover-4.svg");
 	}
-    .header__decorative-masked-element {
-        @apply absolute aspect-square bottom-0 right-0 h-full bg-cyan-300 translate-x-1/2 translate-y-1/2 -z-10 mask-no-repeat mask-contain mask-center;
-        mask-image: url('../assets/images/pixel-circle.svg');
-    }
+	.header__bg {
+		@apply absolute inset-0 bg-white -z-20;
+	}
+	.header__decorative-masked-element.pixel-circle {
+		@apply absolute aspect-square bottom-0 right-0 h-full bg-cyan-300 translate-x-1/2 translate-y-1/2 -z-10 mask-no-repeat mask-contain mask-center;
+		mask-image: url("../assets/images/pixel-circle.svg");
+	}
+    .header__decorative-masked-element.boom {
+		@apply absolute aspect-square top-0 left-0 h-full bg-purple-300 -translate-x-1/2 -translate-y-1/2 -z-10 mask-no-repeat mask-contain mask-center;
+		mask-image: url("../assets/images/boom.svg");
+	}
 </style>
+
+<script>
+	import gsap from "gsap";
+	import { SplitText } from "gsap/all";
+
+	gsap.registerPlugin(SplitText);
+
+	document.addEventListener("DOMContentLoaded", () => {
+		const split = SplitText.create(".header__word", {
+			type: "chars, words",
+		});
+		gsap.from(split.chars, {
+			y: -100,
+			autoAlpha: 0,
+			rotation: "random(-90, 90)",
+			stagger: {
+				amount: 0.8,
+				from: "random",
+			},
+			ease: "elastic.out(1, 0.3)",
+			onComplete: () => split.revert(),
+		});
+
+        const shortInfo = document.querySelector(".short-info");
+        if (shortInfo) {
+            gsap.from(shortInfo, {
+                opacity: 0,
+                y: -50,
+                duration: 1,
+                delay: 0.5,
+                ease: "power3.out",
+            });
+        }
+
+        const button = document.querySelector(".header__button");
+        if (button) {
+            gsap.from(button, {
+                opacity: 0,
+                y: 50,
+                duration: 1,
+                ease: "power3.out",
+            });
+
+            const icon = button.querySelector(".pixel-triangule-icon");
+            const bg = button.querySelector(".header__button-bg");
+            const xTo = gsap.quickTo(bg, "x", { duration: 0.3, ease: "power3" });
+            const yTo = gsap.quickTo(bg, "y", { duration: 0.3, ease: "power3" });
+
+            button.addEventListener("mouseenter", (e) => {
+                gsap.to(bg, {
+                    scale: 1,
+                    duration: 0.3,
+                    ease: "power2.out"
+                });
+                gsap.to(icon, {
+                    x: window.matchMedia('(min-width: 640px)').matches ? 24 : 4,
+                    rotation: 90,
+                    duration: 0.3,
+                    ease: "power2.out"
+                });
+            });
+
+            button.addEventListener("mousemove", (e) => {
+                const { offsetX: x, offsetY: y } = e;
+                xTo(x - 48);
+                yTo(y - 48);
+            });
+
+            button.addEventListener("mouseleave", (e) => {
+                gsap.to(bg, {
+                    scale: 0,
+                    duration: 0.3,
+                    ease: "power2.in"
+                });
+                gsap.to(icon, {
+                    x: 0,
+                    rotation: 0,
+                    duration: 0.3,
+                    ease: "power2.in"
+                });
+            });
+        }
+
+        const socials = document.querySelector(".header__socials");
+        if (socials) {
+            gsap.from(socials, {
+                opacity: 0,
+                x: -50,
+                duration: 1,
+                delay: 0.8,
+                ease: "power3.out",
+            });
+        }
+	});
+
+	gsap.to(".boom", {
+		rotation: 360,
+		repeat: -1,
+		ease: "linear",
+		duration: 20,
+	});
+</script>

@@ -1,0 +1,47 @@
+<footer class="footer">
+    <div class="container">
+        <div class="footer__shapes">
+            <div class="shape bun"></div>
+            <div class="shape pixel-circle"></div>
+            <div class="shape ghost-ish"></div>
+        </div>
+
+        <p>&copy; 2025 Juliann Alejandro Gabriel</p>
+    </div>
+</footer>
+
+<style>
+    @reference "tailwindcss";
+    @reference "../styles/global.css";
+
+    .footer {
+        @apply p-12 bg-white font-anton text-xl text-center text-cyan-900;
+    }
+
+    .container {
+        @apply max-w-7xl mx-auto flex justify-between items-center;
+    }
+
+    .footer__shapes {
+        @apply flex gap-4;
+    }
+
+    .footer__shapes .shape {
+        @apply w-12 h-12 mask-center mask-contain mask-no-repeat;
+    }
+
+    .shape.bun {
+        @apply bg-lime-900;
+        mask-image: url("../assets/images/bun.svg");
+    }
+
+    .shape.pixel-circle {
+        @apply bg-lime-600;
+        mask-image: url("../assets/images/pixel-circle.svg");
+    }
+
+    .shape.ghost-ish {
+        @apply bg-cyan-600;
+        mask-image: url("../assets/images/ghost-ish.svg");
+    }
+</style>

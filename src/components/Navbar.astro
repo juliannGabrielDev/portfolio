@@ -1,87 +1,129 @@
 ---
-import profile from "../assets/images/profile.webp";
+import profile from "../assets/images/profile.jpg";
 ---
 
 <div id="navbar" class="navbar-wrapper">
-	<div class="navbar__profile-wrapper">
-		<img class="profile-img" src={profile.src} alt="Profile" />
-	</div>
-	<nav class="navbar">
-		<ul>
-			<li class="navbar__links"><a href="#home">Home</a></li>
-			<li class="navbar__links"><a href="#about-me">About Me</a></li>
-			<li class="navbar__links"><a href="#projects">Projects</a></li>
-			<li class="navbar__links"><a href="#contact">Contact</a></li>
-		</ul>
-	</nav>
+    <!-- Profile Image -->
+    <div class="navbar__profile-wrapper">
+        <img class="profile-img" src={profile.src} alt="Profile" />
+    </div>
+
+    <!-- Navigation Links -->
+    <nav class="navbar">
+        <ul>
+            <li class="navbar__links"><a href="#home">Home</a></li>
+            <li class="navbar__links"><a href="#about-me">About Me</a></li>
+            <li class="navbar__links"><a href="#projects">Projects</a></li>
+            <li class="navbar__links"><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
 </div>
 
 <style>
-	@reference "tailwindcss";
-	.navbar-wrapper {
-		@apply hidden sm:flex fixed z-10 right-0 left-0 justify-center gap-1 font-medium transition-transform duration-300 ease-in-out transform text-sm sm:text-base sm:top-1;
+    @reference "../styles/global.css";
+    @reference "tailwindcss";
+
+    /* Main navbar container */
+    .navbar-wrapper {
+        @apply fixed z-10 right-0 left-0 justify-center gap-1;
+        @apply hidden sm:flex; /* Hidden on small screens */
+        @apply font-poppins font-medium text-sm sm:text-base;
+        @apply transition-transform duration-300 ease-in-out transform;
+
         @media (width < 40rem) {
             @apply bottom-1;
         }
-	}
-	.navbar-wrapper--visible {
-		@apply translate-y-0;
-	}
-	.navbar-wrapper--hidden {
-		@apply translate-y-full;
-	}
-	.navbar__profile-wrapper {
-		@apply hidden items-center bg-white/80 backdrop-blur-md border-b border-gray-200 p-2 sm:rounded-l-4xl rounded-r-xl sm:flex;
+    }
 
-		.profile-img {
-			mask-image: url("../assets/images/soft-boom.svg");
-			@apply w-12 h-12 object-cover mask-center mask-no-repeat mask-contain;
-		}
-	}
-	.navbar {
-		@apply w-fit flex justify-end bg-white/80 backdrop-blur-md border-b border-gray-200 p-4 rounded-2xl sm:rounded-xl sm:rounded-r-4xl;
+    /* Visibility states for the navbar */
+    .navbar-wrapper--visible {
+        @apply translate-y-0;
+    }
+    .navbar-wrapper--hidden {
+        @apply translate-y-full;
+    }
 
-		ul {
-			@apply flex gap-2 select-none;
-		}
-		.navbar__links {
-			@apply flex bg-purple-100 rounded-lg hover:bg-cyan-200 cursor-pointer ease-in-out transition-colors;
+    /* Profile image wrapper */
+    .navbar__profile-wrapper {
+        @apply hidden sm:flex items-center p-2;
+        @apply bg-white/80 backdrop-blur-md border-b border-gray-200;
+        @apply sm:rounded-l-4xl rounded-r-xl;
+
+        .profile-img {
+            mask-image: url("../assets/images/soft-boom.svg");
+            @apply w-12 h-12 object-cover object-top;
+            @apply mask-center mask-no-repeat mask-contain;
+        }
+    }
+
+    /* Navigation bar */
+    .navbar {
+        @apply w-fit flex justify-end p-4;
+        @apply bg-white/80 backdrop-blur-md border-b border-gray-200;
+        @apply rounded-2xl sm:rounded-xl sm:rounded-r-4xl;
+
+        ul {
+            @apply flex gap-2 select-none;
+        }
+
+        .navbar__links {
+            @apply flex rounded-lg cursor-pointer;
+            @apply bg-lime-100 hover:bg-cyan-200;
+            @apply ease-in-out transition-colors;
 
             a {
-                @apply px-3 py-1 transition-all active:px-2 sm:active:px-6;
+                @apply px-3 py-1 transition-all;
+                @apply active:px-2 sm:active:px-6;
             }
-		}
-		.navbar__links--active {
-			@apply bg-cyan-300 rounded-2xl hover:bg-cyan-400;
-		}
-	}
+        }
+
+        .navbar__links--active {
+            @apply bg-cyan-300 rounded-2xl hover:bg-cyan-400;
+        }
+    }
 </style>
 
 <script>
-	document.addEventListener("DOMContentLoaded", () => {
-		const sections = document.querySelectorAll("section.section, header#home");
-		const navbarLinks = document.querySelectorAll(".navbar__links");
+    import { gsap } from "gsap";
 
-		const onScroll = () => {
-			let currentSection: string | null = "";
-			const scrollPosition = window.scrollY + 200;
+    document.addEventListener("DOMContentLoaded", () => {
+        const navbar = document.getElementById("navbar");
 
-			sections.forEach((section) => {
-				const sectionTop = (section as HTMLElement).offsetTop;
-				if (scrollPosition >= sectionTop) {
-					currentSection = section.getAttribute("id");
-				}
-			});
+        // Initial animation for the navbar
+        if (navbar) {
+            gsap.fromTo(
+                navbar,
+                { top: "-100px", opacity: 0 },
+                { top: "0.25rem", opacity: 1, duration: 1, ease: "power3.out" }
+            );
+        }
 
-			navbarLinks.forEach((link) => {
-				link.classList.toggle(
-					"navbar__links--active",
-					link.textContent.toLowerCase().replace(" ", "-") === currentSection
-				);
-			});
-		};
+        const sections = document.querySelectorAll("section.section, header#home");
+        const navbarLinks = document.querySelectorAll(".navbar__links");
+        const SCROLL_OFFSET = 200; // Offset to trigger the active link change
 
+        const onScroll = () => {
+            let currentSectionId: string | null = null;
+            const scrollPosition = window.scrollY + SCROLL_OFFSET;
+
+            sections.forEach((section) => {
+                if (section instanceof HTMLElement) {
+                    const sectionTop = section.offsetTop;
+                    if (scrollPosition >= sectionTop) {
+                        currentSectionId = section.getAttribute("id");
+                    }
+                }
+            });
+
+            navbarLinks.forEach((link) => {
+                const linkHref = link.querySelector('a')?.getAttribute("href")?.substring(1);
+                const isActive = Boolean(linkHref && linkHref === currentSectionId);
+                link.classList.toggle("navbar__links--active", isActive);
+            });
+        };
+
+        // Set initial active link and add scroll listener
         onScroll();
-		window.addEventListener("scroll", onScroll);
-	});
+        window.addEventListener("scroll", onScroll);
+    });
 </script>

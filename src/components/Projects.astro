@@ -1,0 +1,178 @@
+---
+import Button from "./Button.astro";
+import pixelTriangule from "../assets/images/pixel-triangule.svg";
+import pixelTriangule180deg from "../assets/images/pixel-triangule-180deg.svg";
+---
+
+<section id="projects" class="section">
+	<h2 class="h2">Projects</h2>
+	<div class="grid md:grid-cols-[auto_2fr] gap-4 items-center">
+		<div>
+			<p id="project-description">
+				These projects reflect my growth and learning as an engineering student.
+				Each one represents an opportunity to apply my theoretical knowledge in
+				practice.
+			</p>
+		</div>
+		<div id="projects-container">
+			<div class="project-item h-[600px] bg-white flex-shrink-0 focused">
+				<h3>Project 1</h3>
+			</div>
+			<div class="project-item h-[600px] bg-white flex-shrink-0">
+				<h3>Project 2</h3>
+			</div>
+			<div class="project-item h-[600px] bg-white flex-shrink-0">
+				<h3>Project 3</h3>
+			</div>
+			<div class="project-item h-[600px] bg-white flex-shrink-0">
+				<h3>Project 4</h3>
+			</div>
+			<div class="project-item h-[600px] bg-white flex-shrink-0">
+				<h3>Project 5</h3>
+			</div>
+			<div class="project-item h-[600px] bg-white flex-shrink-0">
+				<h3>Project 6</h3>
+			</div>
+		</div>
+		<Button
+			classes="w-fit absolute bottom-6 -transtion-y-[50%] left-[50%] bg-cyan-900"
+			img={pixelTriangule.src}
+			alt="View all"
+			id="view-all"
+			iconColor="white"
+		/>
+	</div>
+</section>
+
+<style>
+	@reference "../styles/global.css";
+	@reference "tailwindcss";
+
+	#projects {
+		@apply relative bg-cyan-100 py-21 px-8;
+
+		p {
+			@apply text-2xl font-poppins sm:max-w-90;
+		}
+	}
+	.h2 {
+		@apply text-center text-5xl font-anton text-cyan-900 mb-21;
+	}
+	.projects__view-all-button {
+		@apply w-fit absolute bottom-6;
+	}
+	#projects-container {
+		@apply flex gap-3 overflow-hidden rounded-4xl;
+	}
+	.project-item {
+		@apply rounded-4xl p-6 cursor-pointer;
+		width: 200px;
+		transition: width 0.3s ease-in-out;
+	}
+	.project-item.focused {
+		width: 440px;
+	}
+</style>
+
+<script>
+	import { gsap } from "gsap";
+	import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+	gsap.registerPlugin(ScrollTrigger);
+	document.addEventListener("DOMContentLoaded", () => {
+		const projectsContainer = document.getElementById("projects-container");
+		const backButton = document.getElementById("back-button");
+		const forwardButton = document.getElementById("forward-button");
+		const projects = Array.from(document.querySelectorAll(".project-item"));
+		let currentIndex = 0;
+
+		function updateFocus(newIndex: number) {
+			const oldIndex = currentIndex;
+			currentIndex = newIndex;
+
+			if (projects[oldIndex]) {
+				projects[oldIndex].classList.remove("focused");
+			}
+			if (projects[currentIndex]) {
+				projects[currentIndex].classList.add("focused");
+				projects[currentIndex].scrollIntoView({
+					behavior: "smooth",
+					block: "nearest",
+					inline: "center",
+				});
+			}
+		}
+
+		if (
+			projectsContainer &&
+			backButton &&
+			forwardButton &&
+			projects.length > 0
+		) {
+			forwardButton.addEventListener("click", () => {
+				const newIndex = (currentIndex + 1) % projects.length;
+				updateFocus(newIndex);
+			});
+
+			backButton.addEventListener("click", () => {
+				const newIndex = (currentIndex - 1 + projects.length) % projects.length;
+				updateFocus(newIndex);
+			});
+
+			projects.forEach((project, index) => {
+				project.addEventListener("click", () => {
+					updateFocus(index);
+				});
+			});
+		}
+
+		const projectDescription = document.getElementById("project-description");
+		if (projectDescription) {
+			const originalText = projectDescription.innerText;
+			const words = originalText.split(" ");
+			projectDescription.innerHTML = ""; // Clear original text
+
+			words.forEach((word) => {
+				const wordSpan = document.createElement("span");
+				wordSpan.textContent = word;
+				const spaceSpan = document.createElement("span");
+				spaceSpan.innerHTML = "&nbsp;"; // Add space
+
+				const wordWrapper = document.createElement("span");
+				wordWrapper.style.display = "inline-block";
+				wordWrapper.appendChild(wordSpan);
+				wordWrapper.appendChild(spaceSpan);
+				projectDescription.appendChild(wordWrapper);
+			});
+
+			gsap.from(projectDescription.children, {
+				y: 20,
+				opacity: 0,
+				stagger: 0.03,
+				duration: 0.8,
+				ease: "power3.out",
+				scrollTrigger: {
+					trigger: projectDescription,
+					start: "top 80%",
+					toggleActions: "play none none none",
+				},
+			});
+		}
+
+		const projectItems = document.querySelectorAll(".project-item");
+		if (projectItems.length > 0) {
+			gsap.from(projectItems, {
+				x: -100,
+				opacity: 0,
+				stagger: 0.2,
+				duration: 1,
+				ease: "power3.out",
+				scrollTrigger: {
+					trigger: projectsContainer,
+					start: "top 80%",
+					toggleActions: "play none none none",
+				},
+			});
+		}
+	});
+</script>

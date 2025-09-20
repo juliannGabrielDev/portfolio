@@ -53,3 +53,19 @@
 	font-stretch: 100%;
 	src: local("Anton Regular"), local("Anton-Regular"), url(../assets/fonts/anton/anton.woff2) format("woff2");
 }
+
+:is(h1, h2, h3, h4) {
+  @apply text-balance;
+}
+p {
+	@apply text-pretty;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
